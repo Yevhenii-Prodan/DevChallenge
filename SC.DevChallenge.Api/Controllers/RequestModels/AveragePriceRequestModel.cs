@@ -8,7 +8,7 @@ namespace SC.DevChallenge.Api.Controllers.RequestModels
         public string Portfolio { get; init; }
         public string Owner { get; init; }
         public string Instrument { get; init; }
-        public DateTime DateTime { get; set; }
+        public string DateTime { get; set; }
     }
 
     public class AveragePriceRequestModelValidator : AbstractValidator<AveragePriceRequestModel>

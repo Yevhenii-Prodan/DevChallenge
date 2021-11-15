@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Globalization;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SC.DevChallenge.Api.Controllers.RequestModels;
 using SC.DevChallenge.Api.Models;
@@ -23,17 +25,15 @@ namespace SC.DevChallenge.Api.Controllers
         [ProducesResponseType(typeof(AveragePriceResultModel),200)]
         public async Task<IActionResult> Average([FromQuery]AveragePriceRequestModel model)
         {
+            var parsed = DateTime.TryParseExact(model.DateTime, "dd/MM/yyyy HH:mm:ss",CultureInfo.InvariantCulture,DateTimeStyles.None,  out var dateTime);
 
-            var validationResult = await new AveragePriceRequestModelValidator().ValidateAsync(model);
-
-            if (!validationResult.IsValid)
-                return BadRequest(validationResult.Errors);
-
+            if (!parsed)
+                return BadRequest("Wrong datetime format");
 
             // TODO: replace with middleware
             try
             {
-                var result = await _priceService.CalculateAveragePrice(model);
+                var result = await _priceService.CalculateAveragePrice(model, dateTime);
                 return Ok(result);
             }
             catch

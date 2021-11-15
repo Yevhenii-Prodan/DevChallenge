@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SC.DevChallenge.Api.Controllers.RequestModels;
 using SC.DevChallenge.Api.Database;
-using SC.DevChallenge.Api.Database.Entities;
 using SC.DevChallenge.Api.Models;
 using SC.DevChallenge.Api.Services.Abstractions;
 
@@ -21,22 +20,33 @@ namespace SC.DevChallenge.Api.Services
             _dbContext = dbContext;
         }
 
-        public async Task<AveragePriceResultModel> CalculateAveragePrice(AveragePriceRequestModel model)
+        public async Task<AveragePriceResultModel> CalculateAveragePrice(AveragePriceRequestModel model, DateTime dateTime)
         {
-            if (model.DateTime < startPointGeneral)
+            if (dateTime < startPointGeneral)
             {
                 throw new Exception();
             }
-            
-            var (startTimeInterval, endTimeInterval) = GetTimeInterval(model.DateTime);
 
-            var prices = await _dbContext.Prices.Where(x =>
-                x.Instrument.ToLower() == model.Instrument.ToLower() &&
-                x.Owner.ToLower() == model.Owner.ToLower() &&
-                x.Portfolio.ToLower() == model.Portfolio.ToLower() &&
-                x.DateTime > startTimeInterval &&
-                x.DateTime < endTimeInterval
-            ).ToListAsync();
+            if (string.IsNullOrWhiteSpace(model.Instrument) && string.IsNullOrWhiteSpace(model.Owner) &&
+                string.IsNullOrWhiteSpace(model.Portfolio))
+                throw new Exception();
+            
+            var (startTimeInterval, endTimeInterval) = GetTimeInterval(dateTime);
+
+            var query = _dbContext.Prices.Where(x => x.DateTime > startTimeInterval && x.DateTime < endTimeInterval);
+
+
+            if (!string.IsNullOrWhiteSpace(model.Instrument))
+                query = query.Where(x => x.Instrument.ToLower() == model.Instrument.ToLower());
+            
+            if (!string.IsNullOrWhiteSpace(model.Owner))
+                query = query.Where(x => x.Owner.ToLower() == model.Owner.ToLower());
+
+            if (!string.IsNullOrWhiteSpace(model.Portfolio))
+                query = query.Where(x => x.Portfolio.ToLower() == model.Portfolio.ToLower());
+            
+
+            var prices = await query.ToListAsync();
 
             if (prices.Count == 0)
                 throw new Exception();
