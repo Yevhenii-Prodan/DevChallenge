@@ -13,6 +13,8 @@ namespace SC.DevChallenge.Api.Services
     public class PriceService : IPriceService
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly DateTime startPointGeneral = DateTime.Parse("2018-01-01 00:00:00");
+
 
         public PriceService(ApplicationDbContext dbContext)
         {
@@ -21,6 +23,11 @@ namespace SC.DevChallenge.Api.Services
 
         public async Task<AveragePriceResultModel> CalculateAveragePrice(AveragePriceRequestModel model)
         {
+            if (model.DateTime < startPointGeneral)
+            {
+                throw new Exception();
+            }
+            
             var (startTimeInterval, endTimeInterval) = GetTimeInterval(model.DateTime);
 
             var prices = await _dbContext.Prices.Where(x =>
@@ -46,7 +53,7 @@ namespace SC.DevChallenge.Api.Services
 
         private (DateTime, DateTime) GetTimeInterval(DateTime datePoint)
         {
-            var startPoint = DateTime.Parse("2018-01-01 00:00:00");
+            var startPoint = startPointGeneral;
             var endPoint = startPoint.AddSeconds(10000);
             
             while (true)
