@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SC.DevChallenge.Api.Config.Middlewares;
 using SC.DevChallenge.Api.Database;
 using SC.DevChallenge.Api.Services;
 using SC.DevChallenge.Api.Services.Abstractions;
@@ -46,6 +47,7 @@ namespace SC.DevChallenge.Api
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SC.DevChallenge.Api v1"));
             }
 
+            app.UseCustomExceptionHandler();
             app.UseRouting();
 
             app.UseAuthorization();

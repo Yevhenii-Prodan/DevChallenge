@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SC.DevChallenge.Api.Controllers.RequestModels;
 using SC.DevChallenge.Api.Database;
+using SC.DevChallenge.Api.Exceptions.ApiException;
 using SC.DevChallenge.Api.Models;
 using SC.DevChallenge.Api.Services.Abstractions;
 
@@ -24,7 +25,7 @@ namespace SC.DevChallenge.Api.Services
         {
             if (dateTime < startPointGeneral)
             {
-                throw new Exception();
+                throw new BadRequestException("Passed datetime is less than the start point");
             }
 
             if (string.IsNullOrWhiteSpace(model.Instrument) && string.IsNullOrWhiteSpace(model.Owner) &&
@@ -49,7 +50,7 @@ namespace SC.DevChallenge.Api.Services
             var prices = await query.ToListAsync();
 
             if (prices.Count == 0)
-                throw new Exception();
+                throw new NotFoundException("No records with provided parameters were found");
             
             
  
@@ -58,6 +59,7 @@ namespace SC.DevChallenge.Api.Services
                 Date = startTimeInterval.ToString("dd/MM/yyyy HH:mm:ss"),
                 Price = Math.Round(prices.Average(x => x.Price), 2)
             };
+            
         }
 
 

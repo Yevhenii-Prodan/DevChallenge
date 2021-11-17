@@ -14,3 +14,4 @@ omnisharp.json
 
 # .NET Core
 global.json
+.idea/
