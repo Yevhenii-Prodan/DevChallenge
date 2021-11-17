@@ -26,13 +26,12 @@ namespace SC.DevChallenge.Api.Controllers
         [ProducesResponseType(typeof(AveragePriceResultModel),200)]
         public async Task<IActionResult> Average([FromQuery]AveragePriceRequestModel model)
         {
-            var parsed = DateTime.TryParseExact(model.DateTime, "dd/MM/yyyy HH:mm:ss",CultureInfo.InvariantCulture,DateTimeStyles.None,  out var dateTime);
+            // var parsed = DateTime.TryParseExact(model.DateTime, "dd/MM/yyyy HH:mm:ss",CultureInfo.InvariantCulture,DateTimeStyles.None,  out var dateTime);
+            //
+            // if (!parsed)
+            //     throw new BadRequestException("Wrong datetime format");
 
-            if (!parsed)
-                throw new BadRequestException("Wrong datetime format");
-
-            // TODO: replace with middleware
-            var result = await _priceService.CalculateAveragePrice(model, dateTime);
+            var result = await _priceService.CalculateAveragePrice(model, model.DateTimePoint);
             return Ok(result);
         }
     }
