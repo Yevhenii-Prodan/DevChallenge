@@ -1,9 +1,11 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using SC.DevChallenge.Api.Config.Filters;
 using SC.DevChallenge.Api.Config.Middlewares;
 using SC.DevChallenge.Api.Database;
 using SC.DevChallenge.Api.Services;
@@ -21,7 +23,9 @@ namespace SC.DevChallenge.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers(options => options.Filters.Add<ModelStateFilter>())
+                .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<IAssemblyMarker>());
+            
             services.AddSwaggerGen(c =>
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SC.DevChallenge.Api", Version = "v1" })
             );
