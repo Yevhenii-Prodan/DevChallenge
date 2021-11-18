@@ -13,12 +13,14 @@ namespace SC.DevChallenge.Api.Services
     public class PriceService : IPriceService
     {
         private readonly IApplicationDbContext _dbContext;
+        private readonly IPriceCalculator _priceCalculator;
         private readonly DateTime _startPointGeneral = DateTime.Parse("2018-01-01 00:00:00");
 
 
-        public PriceService(IApplicationDbContext dbContext)
+        public PriceService(IApplicationDbContext dbContext, IPriceCalculator priceCalculator)
         {
             _dbContext = dbContext;
+            _priceCalculator = priceCalculator;
         }
 
         public async Task<AveragePriceResultModel> CalculateAveragePrice(AveragePriceRequestModel model, DateTime dateTime)
@@ -53,7 +55,7 @@ namespace SC.DevChallenge.Api.Services
             return new AveragePriceResultModel
             {
                 Date = startTimeInterval,
-                Price = Math.Round(prices.Average(x => x.Price), 2)
+                Price = _priceCalculator.CalculateAveragePrice(prices)
             };
             
         }

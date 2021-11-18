@@ -38,6 +38,7 @@ namespace SC.DevChallenge.Api
 
             
             services.AddTransient<IPriceService, PriceService>();
+            services.AddTransient<IPriceCalculator, PriceCalculator>();
 
         }
 
