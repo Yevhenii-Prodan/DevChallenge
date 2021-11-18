@@ -9,6 +9,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{B5A7EEB9-F000-4185-86F3-7EFEA598FE88}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sc.DevChallenge.Domain", "Sc.DevChallenge.Domain\Sc.DevChallenge.Domain.csproj", "{A92FA0E0-E9B3-49D5-8E42-652884B48A5E}"

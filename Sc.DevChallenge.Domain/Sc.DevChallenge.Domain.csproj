@@ -6,4 +6,8 @@
         <RootNamespace>Sc.DevChallenge.Domain</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="ValueOf" Version="2.0.21" />
+    </ItemGroup>
+
 </Project>

@@ -15,10 +15,7 @@ namespace Sc.DevChallenge.Application.Services
         private readonly IApplicationDbContext _dbContext;
         private readonly IPriceCalculator _priceCalculator;
         private readonly DateTime _startPointGeneral = DateTime.Parse("2018-01-01 00:00:00");
-        private const int TimeIntervalInSec = 10000;
         
-
-
         public PriceService(IApplicationDbContext dbContext, IPriceCalculator priceCalculator)
         {
             _dbContext = dbContext;
@@ -32,10 +29,9 @@ namespace Sc.DevChallenge.Application.Services
                 throw new BadRequestException("Passed datetime is less than the start point");
             }
             
-            var (startTimeInterval, endTimeInterval) = GetTimeInterval(dateTime);
-            var (startTimeIntervalV2, endTimeIntervalV2) = GetTimeIntervalV2(dateTime);
+            var timeInterval = _priceCalculator.CalculatePriceTimeInterval(dateTime);
 
-            var query = _dbContext.Prices.Where(x => x.DateTime > startTimeInterval && x.DateTime < endTimeInterval);
+            var query = _dbContext.Prices.Where(x => x.DateTime > timeInterval.Value.startPoint && x.DateTime < timeInterval.Value.endPoint);
 
 
             if (!string.IsNullOrWhiteSpace(model.Instrument))
@@ -56,7 +52,7 @@ namespace Sc.DevChallenge.Application.Services
  
             return new AveragePriceResultModel
             {
-                Date = startTimeInterval,
+                Date = timeInterval.Value.startPoint,
                 Price = _priceCalculator.CalculateAveragePrice(prices)
             };
             
@@ -79,22 +75,5 @@ namespace Sc.DevChallenge.Application.Services
         }
 
 
-        private (DateTime, DateTime) GetTimeIntervalV2(DateTime datePoint)
-        {
-            var generalStartPointTicks = _startPointGeneral.Ticks;
-            var datePointTicks = datePoint.Ticks;
-            
-
-            var ticksDifference = datePointTicks - generalStartPointTicks;
-
-            var timeIntervalCount = ticksDifference / (TimeIntervalInSec * TimeSpan.TicksPerSecond);
-
-            var startPointTicks = generalStartPointTicks + timeIntervalCount * (TimeIntervalInSec * TimeSpan.TicksPerSecond);
-            
-            var startPoint = new DateTime(startPointTicks);
-            var endPoint = startPoint.AddSeconds(TimeIntervalInSec);
-
-            return (startPoint, endPoint);
-        }
     }
 }
