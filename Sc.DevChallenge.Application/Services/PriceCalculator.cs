@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sc.DevChallenge.Application.Services.Abstractions;
+using Sc.DevChallenge.Application.Common.Interfaces;
 using Sc.DevChallenge.Domain.Entities;
 using Sc.DevChallenge.Domain.ValueObjects;
 

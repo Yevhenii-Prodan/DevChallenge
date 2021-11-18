@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Sc.DevChallenge.Application.Common.Interfaces;
 using Sc.DevChallenge.Application.Models;
 using Sc.DevChallenge.Application.Models.RequestModels;
-using Sc.DevChallenge.Application.Services.Abstractions;
 
 namespace SC.DevChallenge.Api.Controllers
 {

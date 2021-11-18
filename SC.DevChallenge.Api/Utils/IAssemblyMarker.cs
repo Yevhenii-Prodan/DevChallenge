@@ -1,4 +1,4 @@
-﻿namespace SC.DevChallenge.Api
+﻿namespace SC.DevChallenge.Api.Utils
 {
     public interface IAssemblyMarker { }
 }

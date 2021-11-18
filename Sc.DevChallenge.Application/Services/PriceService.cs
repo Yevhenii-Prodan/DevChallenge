@@ -6,7 +6,6 @@ using Sc.DevChallenge.Application.Common.Exceptions.ApiException;
 using Sc.DevChallenge.Application.Common.Interfaces;
 using Sc.DevChallenge.Application.Models;
 using Sc.DevChallenge.Application.Models.RequestModels;
-using Sc.DevChallenge.Application.Services.Abstractions;
 
 namespace Sc.DevChallenge.Application.Services
 {

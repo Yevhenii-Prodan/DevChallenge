@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Sc.DevChallenge.Application.Models;
 using Sc.DevChallenge.Application.Models.RequestModels;
 
-namespace Sc.DevChallenge.Application.Services.Abstractions
+namespace Sc.DevChallenge.Application.Common.Interfaces
 {
     public interface IPriceService
     {

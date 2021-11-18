@@ -1,6 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
-using SC.DevChallenge.Api.Utils.Converters;
+using Sc.DevChallenge.Application.Converters;
 
 namespace Sc.DevChallenge.Application.Models
 {

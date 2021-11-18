@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sc.DevChallenge.Domain.Entities;
 using Sc.DevChallenge.Domain.ValueObjects;
 
-namespace Sc.DevChallenge.Application.Services.Abstractions
+namespace Sc.DevChallenge.Application.Common.Interfaces
 {
     public interface IPriceCalculator
     {

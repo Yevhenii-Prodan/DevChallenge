@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Converters;
 
-namespace SC.DevChallenge.Api.Utils.Converters
+namespace Sc.DevChallenge.Application.Converters
 {
     public class DateFormatConverter : IsoDateTimeConverter
     {
