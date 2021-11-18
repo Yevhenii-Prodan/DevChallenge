@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SC.DevChallenge.Api.Models
+namespace Sc.DevChallenge.Application.Models
 {
     public class BaseErrorModel
     {

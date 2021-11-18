@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SC.DevChallenge.Api.Database.Entities;
+using Sc.DevChallenge.Domain.Entities;
 
-namespace SC.DevChallenge.Api.Database
+namespace Sc.DevChallenge.Application.Common.Interfaces
 {
     public interface IApplicationDbContext
     {

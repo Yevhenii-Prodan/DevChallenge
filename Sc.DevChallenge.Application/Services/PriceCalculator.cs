@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SC.DevChallenge.Api.Database.Entities;
-using SC.DevChallenge.Api.Services.Abstractions;
+using Sc.DevChallenge.Application.Services.Abstractions;
+using Sc.DevChallenge.Domain.Entities;
 
-namespace SC.DevChallenge.Api.Services
+namespace Sc.DevChallenge.Application.Services
 {
     public class PriceCalculator : IPriceCalculator
     {

@@ -1,8 +1,9 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using SC.DevChallenge.Api.Database.Entities;
+using Sc.DevChallenge.Application.Common.Interfaces;
+using Sc.DevChallenge.Domain.Entities;
 
-namespace SC.DevChallenge.Api.Database
+namespace Sc.DevChallenge.Infrastructure.Database
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {

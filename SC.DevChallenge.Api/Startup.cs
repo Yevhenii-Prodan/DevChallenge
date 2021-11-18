@@ -5,11 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SC.DevChallenge.Api.Database;
-using SC.DevChallenge.Api.Services;
-using SC.DevChallenge.Api.Services.Abstractions;
 using SC.DevChallenge.Api.Utils.Filters;
 using SC.DevChallenge.Api.Utils.Middlewares;
+using Sc.DevChallenge.Application.Services;
+using Sc.DevChallenge.Application.Services.Abstractions;
+using Sc.DevChallenge.Infrastructure;
 
 namespace SC.DevChallenge.Api
 {
@@ -31,10 +31,7 @@ namespace SC.DevChallenge.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SC.DevChallenge.Api", Version = "v1" })
             );
 
-            // TODO: Move connection string to appsettings
-            services.AddDbContext<ApplicationDbContext>();
-
-            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+            services.AddInfrastructure();
 
             
             services.AddTransient<IPriceService, PriceService>();

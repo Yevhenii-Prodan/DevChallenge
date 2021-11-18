@@ -3,18 +3,18 @@ using System.Globalization;
 using FluentValidation;
 using Newtonsoft.Json;
 
-namespace SC.DevChallenge.Api.Controllers.RequestModels
+namespace Sc.DevChallenge.Application.Models.RequestModels
 {
     public class AveragePriceRequestModel
     {
-        public string Portfolio { get; init; }
-        public string Owner { get; init; }
-        public string Instrument { get; init; }
+        public string? Portfolio { get; init; }
+        public string? Owner { get; init; }
+        public string? Instrument { get; init; }
         
-        public string DateTime { get; init; }
-        
+        public string DateTime { get; init; } = null!;
+
         [JsonIgnore]
-        internal DateTime DateTimePoint
+        public DateTime DateTimePoint
         {
             get
             {

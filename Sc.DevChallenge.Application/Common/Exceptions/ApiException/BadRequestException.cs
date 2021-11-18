@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using FluentValidation.Results;
 
-namespace SC.DevChallenge.Api.Exceptions.ApiException
+namespace Sc.DevChallenge.Application.Common.Exceptions.ApiException
 {
     /// <summary>
     /// Indicates that one or more validation failures have occurred

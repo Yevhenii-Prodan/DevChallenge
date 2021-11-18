@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using SC.DevChallenge.Api.Database.Entities;
+using Sc.DevChallenge.Domain.Entities;
 
-namespace SC.DevChallenge.Api.Services.Abstractions
+namespace Sc.DevChallenge.Application.Services.Abstractions
 {
     public interface IPriceCalculator
     {

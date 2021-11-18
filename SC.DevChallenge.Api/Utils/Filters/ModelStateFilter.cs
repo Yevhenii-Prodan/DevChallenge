@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc.Filters;
-using SC.DevChallenge.Api.Exceptions.ApiException;
+using Sc.DevChallenge.Application.Common.Exceptions.ApiException;
 
 namespace SC.DevChallenge.Api.Utils.Filters
 {

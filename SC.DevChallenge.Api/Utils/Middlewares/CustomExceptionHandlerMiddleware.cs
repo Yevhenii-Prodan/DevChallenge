@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using SC.DevChallenge.Api.Exceptions.ApiException;
-using SC.DevChallenge.Api.Models;
+using Sc.DevChallenge.Application.Common.Exceptions.ApiException;
+using Sc.DevChallenge.Application.Models;
 
 namespace SC.DevChallenge.Api.Utils.Middlewares
 {

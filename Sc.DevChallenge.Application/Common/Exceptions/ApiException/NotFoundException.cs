@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace SC.DevChallenge.Api.Exceptions.ApiException
+namespace Sc.DevChallenge.Application.Common.Exceptions.ApiException
 {
     /// <summary>
     ///     Indicates that requested resource was not found

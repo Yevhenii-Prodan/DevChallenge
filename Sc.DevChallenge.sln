@@ -13,6 +13,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{B5A7EE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sc.DevChallenge.Domain", "Sc.DevChallenge.Domain\Sc.DevChallenge.Domain.csproj", "{A92FA0E0-E9B3-49D5-8E42-652884B48A5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sc.DevChallenge.Application", "Sc.DevChallenge.Application\Sc.DevChallenge.Application.csproj", "{2DA0485C-B2A5-4969-924E-509FF7B00378}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sc.DevChallenge.Infrastructure", "Sc.DevChallenge.Infrastructure\Sc.DevChallenge.Infrastructure.csproj", "{E0E2DEE9-BE89-4DBA-AA5C-FC7DCFDADEBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +31,19 @@ Global
 		{A92FA0E0-E9B3-49D5-8E42-652884B48A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A92FA0E0-E9B3-49D5-8E42-652884B48A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A92FA0E0-E9B3-49D5-8E42-652884B48A5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DA0485C-B2A5-4969-924E-509FF7B00378}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DA0485C-B2A5-4969-924E-509FF7B00378}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DA0485C-B2A5-4969-924E-509FF7B00378}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DA0485C-B2A5-4969-924E-509FF7B00378}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0E2DEE9-BE89-4DBA-AA5C-FC7DCFDADEBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0E2DEE9-BE89-4DBA-AA5C-FC7DCFDADEBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0E2DEE9-BE89-4DBA-AA5C-FC7DCFDADEBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0E2DEE9-BE89-4DBA-AA5C-FC7DCFDADEBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5C900BA3-7641-47CE-814D-18F84D92267E} = {A3CF259B-B7B5-4C59-A255-34A177B5D6F8}
 		{A92FA0E0-E9B3-49D5-8E42-652884B48A5E} = {A3CF259B-B7B5-4C59-A255-34A177B5D6F8}
+		{2DA0485C-B2A5-4969-924E-509FF7B00378} = {A3CF259B-B7B5-4C59-A255-34A177B5D6F8}
+		{E0E2DEE9-BE89-4DBA-AA5C-FC7DCFDADEBA} = {A3CF259B-B7B5-4C59-A255-34A177B5D6F8}
 	EndGlobalSection
 EndGlobal

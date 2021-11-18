@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using SC.DevChallenge.Api.Controllers.RequestModels;
-using SC.DevChallenge.Api.Models;
+using Sc.DevChallenge.Application.Models;
+using Sc.DevChallenge.Application.Models.RequestModels;
 
-namespace SC.DevChallenge.Api.Services.Abstractions
+namespace Sc.DevChallenge.Application.Services.Abstractions
 {
     public interface IPriceService
     {
