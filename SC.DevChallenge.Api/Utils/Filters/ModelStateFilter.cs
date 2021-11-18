@@ -3,7 +3,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc.Filters;
 using SC.DevChallenge.Api.Exceptions.ApiException;
 
-namespace SC.DevChallenge.Api.Config.Filters
+namespace SC.DevChallenge.Api.Utils.Filters
 {
     public class ModelStateFilter : IActionFilter
     {

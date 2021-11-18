@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using SC.DevChallenge.Api.Exceptions.ApiException;
 using SC.DevChallenge.Api.Models;
 
-namespace SC.DevChallenge.Api.Config.Middlewares
+namespace SC.DevChallenge.Api.Utils.Middlewares
 {
     public class CustomExceptionHandlerMiddleware
     {

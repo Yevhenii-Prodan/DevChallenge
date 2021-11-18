@@ -5,11 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SC.DevChallenge.Api.Config.Filters;
-using SC.DevChallenge.Api.Config.Middlewares;
 using SC.DevChallenge.Api.Database;
 using SC.DevChallenge.Api.Services;
 using SC.DevChallenge.Api.Services.Abstractions;
+using SC.DevChallenge.Api.Utils.Filters;
+using SC.DevChallenge.Api.Utils.Middlewares;
 
 namespace SC.DevChallenge.Api
 {
@@ -23,7 +23,8 @@ namespace SC.DevChallenge.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(options => options.Filters.Add<ModelStateFilter>())
+            services.AddControllersWithViews(options => options.Filters.Add<ModelStateFilter>())
+                .AddNewtonsoftJson()
                 .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<IAssemblyMarker>());
             
             services.AddSwaggerGen(c =>
@@ -37,8 +38,6 @@ namespace SC.DevChallenge.Api
 
             
             services.AddTransient<IPriceService, PriceService>();
-            
-
 
         }
 

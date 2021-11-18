@@ -2,7 +2,6 @@
 using System.Globalization;
 using FluentValidation;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace SC.DevChallenge.Api.Controllers.RequestModels
 {
@@ -13,9 +12,9 @@ namespace SC.DevChallenge.Api.Controllers.RequestModels
         public string Instrument { get; init; }
         
         public string DateTime { get; init; }
-
+        
         [JsonIgnore]
-        public DateTime DateTimePoint
+        internal DateTime DateTimePoint
         {
             get
             {
@@ -44,13 +43,4 @@ namespace SC.DevChallenge.Api.Controllers.RequestModels
                 .WithMessage("provided datetime does not match 'dd/MM/yyyy HH:mm:ss' format");
         }
     }
-    
-    public class DateFormatConverter : IsoDateTimeConverter
-    {
-        public DateFormatConverter(string format)
-        {
-            DateTimeFormat = format;
-        }
-    }
-
 }

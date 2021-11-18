@@ -12,25 +12,21 @@ namespace SC.DevChallenge.Api.Services
 {
     public class PriceService : IPriceService
     {
-        private readonly ApplicationDbContext _dbContext;
-        private readonly DateTime startPointGeneral = DateTime.Parse("2018-01-01 00:00:00");
+        private readonly IApplicationDbContext _dbContext;
+        private readonly DateTime _startPointGeneral = DateTime.Parse("2018-01-01 00:00:00");
 
 
-        public PriceService(ApplicationDbContext dbContext)
+        public PriceService(IApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         public async Task<AveragePriceResultModel> CalculateAveragePrice(AveragePriceRequestModel model, DateTime dateTime)
         {
-            if (dateTime < startPointGeneral)
+            if (dateTime < _startPointGeneral)
             {
                 throw new BadRequestException("Passed datetime is less than the start point");
             }
-
-            if (string.IsNullOrWhiteSpace(model.Instrument) && string.IsNullOrWhiteSpace(model.Owner) &&
-                string.IsNullOrWhiteSpace(model.Portfolio))
-                throw new Exception();
             
             var (startTimeInterval, endTimeInterval) = GetTimeInterval(dateTime);
 
@@ -56,7 +52,7 @@ namespace SC.DevChallenge.Api.Services
  
             return new AveragePriceResultModel
             {
-                Date = startTimeInterval.ToString("dd/MM/yyyy HH:mm:ss"),
+                Date = startTimeInterval,
                 Price = Math.Round(prices.Average(x => x.Price), 2)
             };
             
@@ -65,7 +61,7 @@ namespace SC.DevChallenge.Api.Services
 
         private (DateTime, DateTime) GetTimeInterval(DateTime datePoint)
         {
-            var startPoint = startPointGeneral;
+            var startPoint = _startPointGeneral;
             var endPoint = startPoint.AddSeconds(10000);
             
             while (true)
