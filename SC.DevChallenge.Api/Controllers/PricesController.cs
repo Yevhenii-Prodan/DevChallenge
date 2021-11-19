@@ -23,7 +23,7 @@ namespace SC.DevChallenge.Api.Controllers
         [ProducesResponseType(typeof(AveragePriceResultModel),200)]
         public async Task<IActionResult> Average([FromQuery]AveragePriceRequestModel model)
         {
-            var result = await _priceService.CalculateAveragePrice(model, model.DateTimePoint);
+            var result = await _priceService.CalculateAveragePrice(model);
             return Ok(result);
         }
     }

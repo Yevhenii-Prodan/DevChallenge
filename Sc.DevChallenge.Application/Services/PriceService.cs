@@ -21,9 +21,9 @@ namespace Sc.DevChallenge.Application.Services
             _priceCalculator = priceCalculator;
         }
 
-        public async Task<AveragePriceResultModel> CalculateAveragePrice(AveragePriceRequestModel model, DateTime dateTime)
+        public async Task<AveragePriceResultModel> CalculateAveragePrice(AveragePriceRequestModel model)
         {
-            var timeInterval = _priceCalculator.CalculatePriceTimeInterval(dateTime);
+            var timeInterval = _priceCalculator.CalculatePriceTimeInterval(model.DateTimePoint);
 
             var query = _dbContext.Prices.Where(x => x.DateTime > timeInterval.Value.startPoint && x.DateTime < timeInterval.Value.endPoint);
 
@@ -51,24 +51,5 @@ namespace Sc.DevChallenge.Application.Services
             };
             
         }
-
-
-        private (DateTime, DateTime) GetTimeInterval(DateTime datePoint)
-        {
-            return default;
-            // var startPoint = _startPointGeneral;
-            // var endPoint = startPoint.AddSeconds(10000);
-            //
-            // while (true)
-            // {
-            //     if (datePoint >= startPoint && datePoint < endPoint)
-            //         return (startPoint, endPoint);
-            //
-            //     startPoint = endPoint;
-            //     endPoint = startPoint.AddSeconds(10000);
-            // }
-        }
-
-
     }
 }

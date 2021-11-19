@@ -133,9 +133,35 @@ namespace Sc.DevChallenge.Application.UnitTests.Services
         {
             yield return new object[]
             {
-                DateTime.Parse("2018-01-01 00:00:00"),
-                PriceDateTimeInterval.From((DateTime.Parse("2018-01-01 00:00:00"), DateTime.Parse("2018-01-01 02:46:40")))
+                new DateTime(2018, 1, 1),
+                PriceDateTimeInterval.From((new(2018, 1, 1), new(2018, 1, 1, 2, 46, 40)))
             };
+            
+            yield return new object[]
+            {
+                new DateTime(2019, 05, 14, 11,26,13),
+                PriceDateTimeInterval.From((
+                    new(2019, 5, 14, 9,6,40),
+                    new(2019, 5, 14, 11, 53, 20)))
+            };
+            
+            yield return new object[]
+            {
+                new DateTime(2021, 11, 05, 02,12,10),
+                PriceDateTimeInterval.From((
+                    new(2021, 11, 5, 01,13,20),
+                    new(2021, 11, 5, 04, 0, 0)))
+            };
+            
+            yield return new object[]
+            {
+                new DateTime(2024, 01, 13, 23,58,16),
+                PriceDateTimeInterval.From((
+                    new(2024, 01, 13, 22,26,40),
+                    new(2024, 01, 14, 01, 13, 20)))
+            };
+            
+            
         }
         #endregion
         

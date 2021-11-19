@@ -7,6 +7,6 @@ namespace Sc.DevChallenge.Application.Common.Interfaces
 {
     public interface IPriceService
     {
-        Task<AveragePriceResultModel> CalculateAveragePrice(AveragePriceRequestModel model, DateTime dateTime);
+        Task<AveragePriceResultModel> CalculateAveragePrice(AveragePriceRequestModel model);
     }
 }
