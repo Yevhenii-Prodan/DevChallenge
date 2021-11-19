@@ -19,6 +19,6 @@ namespace Sc.DevChallenge.Application.Common.Interfaces
         /// </summary>
         /// <param name="dateTimePoint">DateTime point</param>
         /// <returns>A time interval</returns>
-        PriceDateTimeInterval CalculatePriceTimeInterval(DateTime dateTimePoint);
+        PriceTimeSlot CalculatePriceTimeSlot(DateTime dateTimePoint);
     }
 }

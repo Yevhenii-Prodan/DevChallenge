@@ -23,9 +23,9 @@ namespace Sc.DevChallenge.Application.Services
 
         public async Task<AveragePriceResultModel> CalculateAveragePrice(AveragePriceRequestModel model)
         {
-            var timeInterval = _priceCalculator.CalculatePriceTimeInterval(model.DateTimePoint);
+            var timeSlot = _priceCalculator.CalculatePriceTimeSlot(model.DateTimePoint);
 
-            var query = _dbContext.Prices.Where(x => x.DateTime > timeInterval.Value.startPoint && x.DateTime < timeInterval.Value.endPoint);
+            var query = _dbContext.Prices.Where(x => x.DateTime > timeSlot.Value.startPoint && x.DateTime < timeSlot.Value.endPoint);
 
 
             if (!string.IsNullOrWhiteSpace(model.Instrument))
@@ -46,7 +46,7 @@ namespace Sc.DevChallenge.Application.Services
  
             return new AveragePriceResultModel
             {
-                Date = timeInterval.Value.startPoint,
+                Date = timeSlot.Value.startPoint,
                 Price = _priceCalculator.CalculateAveragePrice(prices)
             };
             

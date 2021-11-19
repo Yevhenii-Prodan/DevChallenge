@@ -26,9 +26,8 @@ namespace Sc.DevChallenge.Application.Services
         public decimal CalculateAveragePrice(IList<PriceEntity> prices) => Math.Round(prices.Average(x => x.Price), 2);
         
         /// <inheritdoc/>
-        public PriceDateTimeInterval CalculatePriceTimeInterval(DateTime dateTimePoint)
+        public PriceTimeSlot CalculatePriceTimeSlot(DateTime dateTimePoint)
         {
-            
             if (dateTimePoint < _startPointGeneral)
             {
                 throw new BadRequestException("Passed datetime is less than the start point");
@@ -37,17 +36,19 @@ namespace Sc.DevChallenge.Application.Services
             var generalStartPointTicks = _startPointGeneral.Ticks;
             var datePointTicks = dateTimePoint.Ticks;
             
-
+        
             var ticksDifference = datePointTicks - generalStartPointTicks;
-
-            var timeIntervalCount = ticksDifference / (_timeIntervalInSec * TimeSpan.TicksPerSecond);
-
-            var startPointTicks = generalStartPointTicks + timeIntervalCount * (_timeIntervalInSec * TimeSpan.TicksPerSecond);
+        
+            var timeIntervalCount = ticksDifference / ((_timeIntervalInSec+1) * TimeSpan.TicksPerSecond);
+        
+            var startPointTicks = generalStartPointTicks + timeIntervalCount * (_timeIntervalInSec * TimeSpan.TicksPerSecond) + (
+                (timeIntervalCount) * TimeSpan.TicksPerSecond);
             
             var startPoint = new DateTime(startPointTicks);
             var endPoint = startPoint.AddSeconds(_timeIntervalInSec);
-
-            return PriceDateTimeInterval.From((startPoint, endPoint));
+        
+            return PriceTimeSlot.From((startPoint, endPoint));
         }
+        
     }
 }

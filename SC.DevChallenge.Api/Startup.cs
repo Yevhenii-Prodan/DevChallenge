@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using SC.DevChallenge.Api.Utils;
 using SC.DevChallenge.Api.Utils.Filters;
 using SC.DevChallenge.Api.Utils.Middlewares;
+using Sc.DevChallenge.Application;
 using Sc.DevChallenge.Application.Common;
 using Sc.DevChallenge.Application.Common.Interfaces;
 using Sc.DevChallenge.Application.Services;

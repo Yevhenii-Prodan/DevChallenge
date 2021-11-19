@@ -15,7 +15,7 @@ namespace Sc.DevChallenge.Application.UnitTests.Services
     {
         private readonly ApplicationSettings _applicationSettings = new()
         {
-            GeneralStartPoint = DateTime.Parse("2018-01-01 00:00:00"),
+            GeneralStartPoint = new DateTime(2018, 1, 1),
             TimeIntervalInSec = 10000
         };
 
@@ -35,14 +35,14 @@ namespace Sc.DevChallenge.Application.UnitTests.Services
 
 
         [Theory]
-        [MemberData(nameof(GetTimeIntervalTestData))]
-        public void CalculatePriceTimeInterval_ShouldReturnProperTimeInterval(DateTime data, PriceDateTimeInterval expectedValue)
+        [MemberData(nameof(GetTimeSlotTestData))]
+        public void CalculatePriceTimeSlot_ShouldReturnProperTimeSlot(DateTime data, PriceTimeSlot expectedValue)
         {
             // Arrange
             var priceCalculator = new PriceCalculator(_applicationSettings);
 
             // Act
-            var result = priceCalculator.CalculatePriceTimeInterval(data);
+            var result = priceCalculator.CalculatePriceTimeSlot(data);
 
             // Assert
             result.Should().Be(expectedValue);
@@ -56,7 +56,7 @@ namespace Sc.DevChallenge.Application.UnitTests.Services
             var priceCalculator = new PriceCalculator(_applicationSettings);
             
             // Act
-            Action action = () => priceCalculator.CalculatePriceTimeInterval(new DateTime(2015, 1, 1));
+            Action action = () => priceCalculator.CalculatePriceTimeSlot(new DateTime(2015, 1, 1));
             
             //Assert
             action.Should().Throw<BadRequestException>()
@@ -72,13 +72,13 @@ namespace Sc.DevChallenge.Application.UnitTests.Services
             var priceCalculator = new PriceCalculator(_applicationSettings);
             
             // Act
-            Action action = () => priceCalculator.CalculatePriceTimeInterval(new DateTime(2019, 1, 1));
+            Action action = () => priceCalculator.CalculatePriceTimeSlot(new DateTime(2019, 1, 1));
             
             //Assert
             action.Should().NotThrow<BadRequestException>();
         }
-        
-        
+
+
         #region Test data
         public static IEnumerable<object[]> GetAveragePriceTestData()
         {
@@ -129,36 +129,36 @@ namespace Sc.DevChallenge.Application.UnitTests.Services
             };
         }
 
-        public static IEnumerable<object[]> GetTimeIntervalTestData()
+        public static IEnumerable<object[]> GetTimeSlotTestData()
         {
             yield return new object[]
             {
                 new DateTime(2018, 1, 1),
-                PriceDateTimeInterval.From((new(2018, 1, 1), new(2018, 1, 1, 2, 46, 40)))
+                PriceTimeSlot.From((new(2018, 1, 1), new(2018, 1, 1, 2, 46, 40)))
             };
             
             yield return new object[]
             {
                 new DateTime(2019, 05, 14, 11,26,13),
-                PriceDateTimeInterval.From((
-                    new(2019, 5, 14, 9,6,40),
-                    new(2019, 5, 14, 11, 53, 20)))
+                PriceTimeSlot.From((
+                    new(2019, 5, 14, 10,18,26),
+                    new(2019, 5, 14, 13, 05, 06)))
             };
             
             yield return new object[]
             {
                 new DateTime(2021, 11, 05, 02,12,10),
-                PriceDateTimeInterval.From((
-                    new(2021, 11, 5, 01,13,20),
-                    new(2021, 11, 5, 04, 0, 0)))
+                PriceTimeSlot.From((
+                    new(2021, 11, 5, 01,48,50),
+                    new(2021, 11, 5, 04, 35, 30)))
             };
             
             yield return new object[]
             {
                 new DateTime(2024, 01, 13, 23,58,16),
-                PriceDateTimeInterval.From((
-                    new(2024, 01, 13, 22,26,40),
-                    new(2024, 01, 14, 01, 13, 20)))
+                PriceTimeSlot.From((
+                    new(2024, 01, 13, 22,10,40),
+                    new(2024, 01, 14, 00, 57, 20)))
             };
             
             
