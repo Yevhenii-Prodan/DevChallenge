@@ -8,6 +8,7 @@ using Microsoft.OpenApi.Models;
 using SC.DevChallenge.Api.Utils;
 using SC.DevChallenge.Api.Utils.Filters;
 using SC.DevChallenge.Api.Utils.Middlewares;
+using Sc.DevChallenge.Application.Common;
 using Sc.DevChallenge.Application.Common.Interfaces;
 using Sc.DevChallenge.Application.Services;
 using Sc.DevChallenge.Infrastructure;
@@ -19,11 +20,15 @@ namespace SC.DevChallenge.Api
         public Startup(IConfiguration configuration) =>
             Configuration = configuration;
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ApplicationSettings>(Configuration);
+            var config = Configuration.Get<ApplicationSettings>();
+
+
             services.AddControllersWithViews(options => options.Filters.Add<ModelStateFilter>())
                 .AddNewtonsoftJson()
                 .AddFluentValidation(options => options.RegisterValidatorsFromAssemblyContaining<IAssemblyMarker>());
@@ -34,7 +39,7 @@ namespace SC.DevChallenge.Api
 
             services.AddInfrastructure();
 
-            
+            services.AddSingleton(x => config);
             services.AddTransient<IPriceService, PriceService>();
             services.AddTransient<IPriceCalculator, PriceCalculator>();
 
