@@ -14,7 +14,7 @@ namespace Sc.DevChallenge.Application.Models.RequestModels
         public string DateTime { get; init; } = null!;
 
         [JsonIgnore]
-        public DateTime DateTimePoint
+        internal DateTime DateTimePoint
         {
             get
             {
