@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sc.DevChallenge.Application.Models;
 using Sc.DevChallenge.Application.Models.RequestModels;
@@ -10,5 +11,7 @@ namespace Sc.DevChallenge.Application.Common.Interfaces
     {
         Task<AveragePriceResultModel> CalculateAveragePrice(AveragePriceRequestModel model);
         Task<BenchmarkResultModel> CalculateBenchmarkAveragePrice(BenchmarkRequestModel model);
+
+        Task<IEnumerable<AggregatedBenchmarkResultModel>> CalculateAggregatedBenchmarkAveragePrice(AggregatedBenchmarkRequestModel model);
     }
 }

@@ -78,8 +78,113 @@ namespace Sc.DevChallenge.Application.UnitTests.Services
             action.Should().NotThrow<BadRequestException>();
         }
 
+        [Theory]
+        [MemberData(nameof(GetQuartileTestData))]
+        public void CalculateQuartile_ShodReturnProperValue(int n, int quartile, int expectedResult)
+        {
+            
+            // Arrange
+            var priceCalculator = new PriceCalculator(_applicationSettings);
+            
+            // Act 
+            var result = priceCalculator.CalculateQuartile(n, quartile);
+            
+            //Assert
+            result.Should().Be(expectedResult);
+        }
+
+        [Fact]
+        public void CalculateQuartile_ShouldThrowException_WhenIncorrectDataPassed()
+        {
+            // Arrange   
+            var priceCalculator = new PriceCalculator(_applicationSettings);
+
+            // Act
+            Action act1 = () => priceCalculator.CalculateQuartile(10, 0);
+            Action act2 = () => priceCalculator.CalculateQuartile(10, 5);
+            
+            //Assert
+            act1.Should().Throw<ArgumentException>();
+            act2.Should().Throw<ArgumentException>();
+        }
+
+        [Theory]
+        [MemberData(nameof(GetBenchmarkPriceTestData))]
+        public void CalculateBenchmarkPrice_ShouldReturnProperValue(List<PriceEntity> prices, decimal expectedResult)
+        {
+            // Arrange   
+            var priceCalculator = new PriceCalculator(_applicationSettings);
+            
+            // Act
+            var result = priceCalculator.CalculateBenchmarkPrice(prices);
+            
+            // Assert
+            result.Should().Be(expectedResult);
+        }
+
 
         #region Test data
+
+        public static IEnumerable<object[]> GetBenchmarkPriceTestData()
+        {
+            yield return new object[]
+            {
+                new List<PriceEntity>()
+                {
+                    new () {Price = new decimal(174.5)},
+                    new () {Price = new decimal(25.6)},
+                    new () {Price = new decimal(59.2)},
+                    new () {Price = new decimal(113.54)},
+                    new () {Price = new decimal(11.6)},
+                    new () {Price = new decimal(3.14)},
+                    new () {Price = new decimal(69.420)},
+                    new () {Price = new decimal(123.16)},
+                },
+                72.52
+            };
+
+            var list = new List<PriceEntity>()
+            {
+                new() {Price = new decimal(174.5)},
+                new() {Price = new decimal(25.6)},
+                new() {Price = new decimal(59.2)},
+            };
+
+            yield return new object[]
+            {
+                list, Math.Round(list.Average(x => x.Price), 2)
+            };
+        }
+
+        public static IEnumerable<object[]> GetQuartileTestData()
+        {
+            yield return new object[]
+            {
+                8, 1, 2
+            };
+
+
+            yield return new object[]
+            {
+                10,3,7
+            };
+
+            yield return new object[]
+            {
+                25,3,18
+            };
+
+            yield return new object[]
+            {
+                12,1,3
+            };
+
+            yield return new object[]
+            {
+                150,3,112
+            };
+        }
+
         public static IEnumerable<object[]> GetAveragePriceTestData()
         {
             yield return new object[]

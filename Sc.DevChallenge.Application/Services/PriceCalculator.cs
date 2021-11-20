@@ -51,12 +51,66 @@ namespace Sc.DevChallenge.Application.Services
         }
         
         /// <inheritdoc/>
-        public decimal CalculateQuartile(int n, int quartile)
+        public int CalculateQuartile(int n, int quartile)
         {
             if (quartile is < 1 or > 4)
                 throw new InvalidEnumArgumentException("Quartile value must be between 1 and 4");
 
-            return Math.Ceiling((quartile * n - quartile) / new decimal(4));
+            return decimal.ToInt32(Math.Ceiling((quartile * n - quartile) / new decimal(4)));
+        }
+
+        /// <inheritdoc/>
+        public decimal CalculateBenchmarkPrice(List<PriceEntity> prices)
+        {
+            if (prices.Count == 0)
+                return 0;
+
+            if (prices.Count <= 3)
+            {
+                return CalculateAveragePrice(prices);
+            }
+            
+            prices = prices.OrderBy(x => x.Price).ToList();
+            var quartile1 = CalculateQuartile(prices.Count, 1);
+            var quartile3 = CalculateQuartile(prices.Count, 3);
+
+            var interQuartileInterval = prices[quartile3].Price - prices[quartile1].Price;
+
+            var lowerBound = prices[quartile1].Price - new decimal(1.5) * interQuartileInterval;
+            var upperBound = prices[quartile3].Price + new decimal(1.5) * interQuartileInterval;
+            
+
+            var filteredPrices =
+                prices.Where(x => x.Price > lowerBound && x.Price < upperBound).ToList();
+
+            return CalculateAveragePrice(filteredPrices);
+        }
+        
+        /// <inheritdoc/>
+        public int CalculateIntervalCount(PriceTimeSlot firstTimeSlot, PriceTimeSlot lastTimeSlot)
+        {
+            var intervalCount = 0;
+
+            var interval = firstTimeSlot.Value.startPoint;
+
+            while (true)
+            {
+                if (interval > lastTimeSlot.Value.startPoint)
+                    break;
+
+                intervalCount++;
+                interval = interval.AddSeconds(10000);
+            }
+
+            return intervalCount;
+        }
+        
+        /// <inheritdoc/>
+        public PriceTimeSlot CalculateEndSlot(PriceTimeSlot startSlot, int offset)
+        {
+            return PriceTimeSlot.From(
+                (startSlot.Value.startPoint.AddSeconds(offset * _timeIntervalInSec),
+                startSlot.Value.endPoint.AddSeconds(offset * _timeIntervalInSec)));
         }
     }
 }

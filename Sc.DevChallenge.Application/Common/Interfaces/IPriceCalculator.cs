@@ -27,6 +27,29 @@ namespace Sc.DevChallenge.Application.Common.Interfaces
         /// <param name="n">Count of elements</param>
         /// <param name="quartile">Number of quartile must be 1-4</param>
         /// <returns>A quartile value</returns>
-        decimal CalculateQuartile(int n, int quartile);
+        int CalculateQuartile(int n, int quartile);
+
+        /// <summary>
+        /// Calculate benchmark price
+        /// </summary>
+        /// <param name="prices"></param>
+        /// <returns></returns>
+        decimal CalculateBenchmarkPrice(List<PriceEntity> prices);
+        
+        /// <summary>
+        /// Calculates count of interval
+        /// </summary>
+        /// <param name="firstTimeSlot"></param>
+        /// <param name="lastTimeSlot"></param>
+        /// <returns></returns>
+        int CalculateIntervalCount(PriceTimeSlot firstTimeSlot, PriceTimeSlot lastTimeSlot);
+        
+        /// <summary>
+        /// Calculates end slot
+        /// </summary>
+        /// <param name="startSlot"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        PriceTimeSlot CalculateEndSlot(PriceTimeSlot startSlot, int offset);
     }
 }
