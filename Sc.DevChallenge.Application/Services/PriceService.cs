@@ -25,7 +25,7 @@ namespace Sc.DevChallenge.Application.Services
         {
             var timeSlot = _priceCalculator.CalculatePriceTimeSlot(model.DateTimePoint);
 
-            var query = _dbContext.Prices.Where(x => x.DateTime > timeSlot.Value.startPoint && x.DateTime < timeSlot.Value.endPoint);
+            var query = _dbContext.Prices.Where(x => x.DateTime >= timeSlot.Value.startPoint && x.DateTime <= timeSlot.Value.endPoint);
 
 
             if (!string.IsNullOrWhiteSpace(model.Instrument))

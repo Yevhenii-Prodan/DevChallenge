@@ -36,16 +36,15 @@ namespace Sc.DevChallenge.Application.Services
             var generalStartPointTicks = _startPointGeneral.Ticks;
             var datePointTicks = dateTimePoint.Ticks;
             
-        
+
             var ticksDifference = datePointTicks - generalStartPointTicks;
-        
-            var timeIntervalCount = ticksDifference / ((_timeIntervalInSec+1) * TimeSpan.TicksPerSecond);
-        
-            var startPointTicks = generalStartPointTicks + timeIntervalCount * (_timeIntervalInSec * TimeSpan.TicksPerSecond) + (
-                (timeIntervalCount) * TimeSpan.TicksPerSecond);
+
+            var timeIntervalCount = ticksDifference / ((_timeIntervalInSec) * TimeSpan.TicksPerSecond);
+
+            var startPointTicks = generalStartPointTicks + timeIntervalCount * (_timeIntervalInSec * TimeSpan.TicksPerSecond);
             
             var startPoint = new DateTime(startPointTicks);
-            var endPoint = startPoint.AddSeconds(_timeIntervalInSec);
+            var endPoint = startPoint.AddSeconds(_timeIntervalInSec - 1);
         
             return PriceTimeSlot.From((startPoint, endPoint));
         }

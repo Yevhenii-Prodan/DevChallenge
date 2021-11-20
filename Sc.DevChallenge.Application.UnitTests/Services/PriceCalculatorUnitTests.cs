@@ -134,31 +134,31 @@ namespace Sc.DevChallenge.Application.UnitTests.Services
             yield return new object[]
             {
                 new DateTime(2018, 1, 1),
-                PriceTimeSlot.From((new(2018, 1, 1), new(2018, 1, 1, 2, 46, 40)))
+                PriceTimeSlot.From((new(2018, 1, 1), new(2018, 1, 1, 2, 46, 39)))
             };
             
             yield return new object[]
             {
                 new DateTime(2019, 05, 14, 11,26,13),
                 PriceTimeSlot.From((
-                    new(2019, 5, 14, 10,18,26),
-                    new(2019, 5, 14, 13, 05, 06)))
+                    new(2019, 5, 14, 09,06,40),
+                    new(2019, 5, 14, 11, 53, 19)))
             };
             
             yield return new object[]
             {
                 new DateTime(2021, 11, 05, 02,12,10),
                 PriceTimeSlot.From((
-                    new(2021, 11, 5, 01,48,50),
-                    new(2021, 11, 5, 04, 35, 30)))
+                    new(2021, 11, 5, 01,13,20),
+                    new(2021, 11, 5, 03, 59, 59)))
             };
             
             yield return new object[]
             {
                 new DateTime(2024, 01, 13, 23,58,16),
                 PriceTimeSlot.From((
-                    new(2024, 01, 13, 22,10,40),
-                    new(2024, 01, 14, 00, 57, 20)))
+                    new(2024, 01, 13, 22,26,40),
+                    new(2024, 01, 14, 01, 13, 19)))
             };
             
             
