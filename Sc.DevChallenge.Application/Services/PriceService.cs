@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Sc.DevChallenge.Application.Common.Exceptions.ApiException;
 using Sc.DevChallenge.Application.Common.Interfaces;
-using Sc.DevChallenge.Application.Models;
 using Sc.DevChallenge.Application.Models.RequestModels;
+using Sc.DevChallenge.Application.Models.ResultModels;
 
 namespace Sc.DevChallenge.Application.Services
 {
@@ -50,6 +50,38 @@ namespace Sc.DevChallenge.Application.Services
                 Price = _priceCalculator.CalculateAveragePrice(prices)
             };
             
+        }
+
+        public async Task<BenchmarkResultModel> CalculateBenchmarkAveragePrice(BenchmarkRequestModel model)
+        {
+            var timeSlot = _priceCalculator.CalculatePriceTimeSlot(model.DateTimePoint);
+
+            var prices = await _dbContext.Prices.Where(x =>
+                x.DateTime >= timeSlot.Value.startPoint &&
+                x.DateTime <= timeSlot.Value.endPoint &&
+                x.Portfolio == model.Portfolio!.ToLower()).ToListAsync();
+
+            prices = prices.OrderBy(x => x.Price).ToList();
+
+            if (prices.Count == 0)
+                throw new NotFoundException("No records with provided parameters were found");
+
+            var quartile1 = _priceCalculator.CalculateQuartile(prices.Count, 1);
+            var quartile3 = _priceCalculator.CalculateQuartile(prices.Count, 3);
+
+            var interQuartileInterval = quartile3 - quartile1;
+
+            var bottomInterval = prices[decimal.ToInt32(quartile1)].Price - new decimal(1.5) * interQuartileInterval;
+            var topInterval = prices[decimal.ToInt32(quartile3)].Price + new decimal(1.5) * interQuartileInterval;
+
+            var filteredPrices = prices.Where(x => x.Price >= bottomInterval && x.Price <= topInterval).ToList();
+
+            return new BenchmarkResultModel
+            {
+                Date = timeSlot.Value.startPoint,
+                Price = _priceCalculator.CalculateAveragePrice(filteredPrices)
+            };
+
         }
     }
 }

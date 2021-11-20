@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Sc.DevChallenge.Application.Common;
 using Sc.DevChallenge.Application.Common.Exceptions.ApiException;
@@ -49,5 +50,13 @@ namespace Sc.DevChallenge.Application.Services
             return PriceTimeSlot.From((startPoint, endPoint));
         }
         
+        /// <inheritdoc/>
+        public decimal CalculateQuartile(int n, int quartile)
+        {
+            if (quartile is < 1 or > 4)
+                throw new InvalidEnumArgumentException("Quartile value must be between 1 and 4");
+
+            return Math.Ceiling((quartile * n - quartile) / new decimal(4));
+        }
     }
 }

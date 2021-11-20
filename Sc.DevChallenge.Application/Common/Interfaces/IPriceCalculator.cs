@@ -20,5 +20,13 @@ namespace Sc.DevChallenge.Application.Common.Interfaces
         /// <param name="dateTimePoint">DateTime point</param>
         /// <returns>A time interval</returns>
         PriceTimeSlot CalculatePriceTimeSlot(DateTime dateTimePoint);
+
+        /// <summary>
+        /// Calculates a quartile
+        /// </summary>
+        /// <param name="n">Count of elements</param>
+        /// <param name="quartile">Number of quartile must be 1-4</param>
+        /// <returns>A quartile value</returns>
+        decimal CalculateQuartile(int n, int quartile);
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Sc.DevChallenge.Application.Common.Interfaces;
 using Sc.DevChallenge.Application.Models;
 using Sc.DevChallenge.Application.Models.RequestModels;
+using Sc.DevChallenge.Application.Models.ResultModels;
 
 namespace SC.DevChallenge.Api.Controllers
 {
@@ -29,5 +30,14 @@ namespace SC.DevChallenge.Api.Controllers
             var result = await _priceService.CalculateAveragePrice(model);
             return Ok(result);
         }
+
+
+        [HttpGet("benchmark")]
+        public async Task<IActionResult> Benchmark([FromQuery] BenchmarkRequestModel model)
+        {
+            var result = await _priceService.CalculateBenchmarkAveragePrice(model);
+            return Ok(result);
+        }
+        
     }
 }

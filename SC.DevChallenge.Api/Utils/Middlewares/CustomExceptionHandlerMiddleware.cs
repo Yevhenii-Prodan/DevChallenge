@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Sc.DevChallenge.Application.Common.Exceptions.ApiException;
 using Sc.DevChallenge.Application.Models;
+using Sc.DevChallenge.Application.Models.ResultModels;
 
 namespace SC.DevChallenge.Api.Utils.Middlewares
 {

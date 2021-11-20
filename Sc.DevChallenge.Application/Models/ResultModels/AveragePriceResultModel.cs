@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Sc.DevChallenge.Application.Converters;
 
-namespace Sc.DevChallenge.Application.Models
+namespace Sc.DevChallenge.Application.Models.ResultModels
 {
     public class AveragePriceResultModel
     {
